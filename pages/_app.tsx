@@ -1,8 +1,14 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import React from "react";
+import { ToastProvider } from "../contexts/ToastContext";
+import Toast from "../layouts/Toast";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export default function Application({ Component, pageProps }) {
+  return (
+    <React.StrictMode>
+      <ToastProvider>
+        <Component {...pageProps} />
+        <Toast />
+      </ToastProvider>
+    </React.StrictMode>
+  );
 }
-
-export default MyApp
