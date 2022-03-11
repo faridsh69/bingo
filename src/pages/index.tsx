@@ -1,14 +1,22 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import type { NextPage } from "next";
-import Head from "next/head";
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
-import { config } from "../configs";
-import { useGameReducer } from "../hooks/useBingoReducer";
-import { useSnackbar } from "../hooks/useSnackbar";
-import { Header } from "../components/Header";
-import { SideBar } from "../components/SideBar";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { config } from '../configs';
+import { useGameReducer } from '../hooks/useBingoReducer';
+import { useSnackbar } from '../hooks/useSnackbar';
+import { Header } from '../components/Header';
+import { SideBar } from '../components/SideBar';
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@mui/material';
 
 const Index: NextPage = () => {
   const [state, dispatch] = useGameReducer();
@@ -18,11 +26,11 @@ const Index: NextPage = () => {
   const { bingoCardClassName, selectedCardClassName } = config;
 
   useEffect(() => {
-    dispatch({ type: "initiate-game" });
+    dispatch({ type: 'initiate-game' });
   }, []);
 
   useEffect(() => {
-    dispatch({ type: "check-bingo" });
+    dispatch({ type: 'check-bingo' });
   }, [tableCards, selectedCards]);
 
   const selectCard = (event: React.MouseEvent<HTMLElement>) => {
@@ -30,7 +38,7 @@ const Index: NextPage = () => {
     if (selectedCards.includes(card)) {
       openSnackbar({
         message: `Card is already selected: ${card}`,
-        status: "info",
+        status: 'info'
       });
 
       return;
@@ -38,13 +46,13 @@ const Index: NextPage = () => {
     if (!showedCards.includes(card)) {
       openSnackbar({
         message: `Selected Card is not in list of showed cards: ${card}`,
-        status: "warning",
+        status: 'warning'
       });
 
       return;
     }
 
-    dispatch({ type: "select-card", card });
+    dispatch({ type: 'select-card', card });
   };
 
   return (
@@ -61,9 +69,9 @@ const Index: NextPage = () => {
           <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableBody>
-                {tableCards.map((row) => (
+                {tableCards.map(row => (
                   <TableRow key={JSON.stringify(row)}>
-                    {row.map((card) => (
+                    {row.map(card => (
                       <TableCell
                         key={card}
                         onClick={selectCard}
@@ -72,7 +80,7 @@ const Index: NextPage = () => {
                             ? bingoCardClassName
                             : selectedCards.includes(card)
                             ? selectedCardClassName
-                            : " "
+                            : ' '
                         }
                       >
                         {card}

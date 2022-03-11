@@ -1,3 +1,3 @@
-import SnackbarProps from "./SnackbarProps";
+import SnackbarProps from './SnackbarProps';
 
-export type SnackbarOption = Omit<SnackbarProps, "open">;
+export type SnackbarOption = Omit<SnackbarProps, 'open'>;

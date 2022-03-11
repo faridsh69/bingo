@@ -1,5 +1,5 @@
-import { config } from "../configs";
-import { cards } from "../mocks/cards";
+import { config } from '../configs';
+import { cards } from '../mocks/cards';
 
 export const createTableCards = (): string[][] => {
   const { dimention } = config;
@@ -24,11 +24,7 @@ export const createTableCards = (): string[][] => {
   return table;
 };
 
-const selectTableCard = (
-  i: number,
-  j: number,
-  selectedCards: string[]
-): string => {
+const selectTableCard = (i: number, j: number, selectedCards: string[]): string => {
   const { freeCardIndex, freeCardValue } = config;
   let card: string | null = freeCardValue;
   if (i !== freeCardIndex || j !== freeCardIndex) {
@@ -37,11 +33,8 @@ const selectTableCard = (
   return card as string;
 };
 
-export const selectNewItem = (
-  items: string[],
-  selectedItems: string[]
-): string | null => {
-  const restOfItems: string[] = items.filter((item) => {
+export const selectNewItem = (items: string[], selectedItems: string[]): string | null => {
+  const restOfItems: string[] = items.filter(item => {
     return !selectedItems.includes(item);
   });
   if (!restOfItems) {
@@ -52,10 +45,7 @@ export const selectNewItem = (
   return restOfItems[randomIndex];
 };
 
-export const getBingoCards = (
-  tableCards: string[][],
-  selectedCards: string[]
-): string[] => {
+export const getBingoCards = (tableCards: string[][], selectedCards: string[]): string[] => {
   const { dimention } = config;
   let bingoCards: string[] = [];
   let i: number = 0;
@@ -63,16 +53,8 @@ export const getBingoCards = (
     bingoCards = checkBingoRows(i, selectedCards, tableCards, bingoCards);
     bingoCards = checkBingoColumns(i, selectedCards, tableCards, bingoCards);
   }
-  bingoCards = checkBingoDiagonalDecreasing(
-    selectedCards,
-    tableCards,
-    bingoCards
-  );
-  bingoCards = checkBingoDiagonalIncreasing(
-    selectedCards,
-    tableCards,
-    bingoCards
-  );
+  bingoCards = checkBingoDiagonalDecreasing(selectedCards, tableCards, bingoCards);
+  bingoCards = checkBingoDiagonalIncreasing(selectedCards, tableCards, bingoCards);
 
   return bingoCards;
 };

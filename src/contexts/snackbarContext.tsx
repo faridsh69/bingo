@@ -1,13 +1,13 @@
-import { Alert, Snackbar, Stack, Typography } from "@mui/material";
-import React, { createContext, FC, useMemo, useState } from "react";
-import { SnackbarContextType } from "../interfaces/SnackbarContextType";
-import { SnackbarOption } from "../interfaces/SnackbarOption";
-import SnackbarProps from "../interfaces/SnackbarProps";
+import { Alert, Snackbar, Stack, Typography } from '@mui/material';
+import React, { createContext, FC, useMemo, useState } from 'react';
+import { SnackbarContextType } from '../interfaces/SnackbarContextType';
+import { SnackbarOption } from '../interfaces/SnackbarOption';
+import SnackbarProps from '../interfaces/SnackbarProps';
 
 const defaultSnackbarProps: SnackbarProps = {
   open: false,
-  message: "",
-  status: "info",
+  message: '',
+  status: 'info'
 };
 
 const CTX_INITIAL_VALUE = [() => {}] as const;
@@ -19,7 +19,7 @@ export const SnackbarProvider: FC = ({ children }) => {
   const { open, message, status } = snackbarProps;
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
 
@@ -35,9 +35,9 @@ export const SnackbarProvider: FC = ({ children }) => {
   return (
     <SnackbarContext.Provider value={contextValue}>
       {children}
-      <Stack spacing={2} sx={{ width: "100%" }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} onClose={handleClose} autoHideDuration={3000}>
-          <Alert onClose={handleClose} severity={status} sx={{ width: "100%" }}>
+          <Alert onClose={handleClose} severity={status} sx={{ width: '100%' }}>
             <Typography>{message} </Typography>
           </Alert>
         </Snackbar>

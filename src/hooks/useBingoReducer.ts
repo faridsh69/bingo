@@ -1,22 +1,19 @@
-import { Dispatch, Reducer, useReducer } from "react";
+import { Dispatch, Reducer, useReducer } from 'react';
 
-import { config } from "../configs";
-import { cards } from "../mocks/cards";
-import {
-  createTableCards,
-  selectNewItem,
-  getBingoCards,
-} from "../helpers/bingo";
-import { BingoStateInterface } from "../interfaces/BingoStateInterface";
-import { BingoDispathInterface } from "../interfaces/BingoDispathInterface";
+import { config } from '../configs';
+import { cards } from '../mocks/cards';
+import { createTableCards, selectNewItem, getBingoCards } from '../helpers/bingo';
+import { BingoStateInterface } from '../interfaces/BingoStateInterface';
+import { BingoDispathInterface } from '../interfaces/BingoDispathInterface';
 
 export function useGameReducer(): [
   state: BingoStateInterface,
   dispatch: Dispatch<BingoDispathInterface>
 ] {
-  const [state, dispatch] = useReducer<
-    Reducer<BingoStateInterface, BingoDispathInterface>
-  >(reducer, initialState());
+  const [state, dispatch] = useReducer<Reducer<BingoStateInterface, BingoDispathInterface>>(
+    reducer,
+    initialState()
+  );
 
   return [state, dispatch];
 }
@@ -24,13 +21,13 @@ export function useGameReducer(): [
 const initialState = (): BingoStateInterface => {
   const { speeds, difficulties, freeCardValue } = config;
   return {
-    status: "initiated",
+    status: 'initiated',
     speed: speeds[0].value,
     difficulty: difficulties[0].value,
     tableCards: createTableCards(),
     showedCards: [],
     selectedCards: [freeCardValue],
-    bingoCards: [],
+    bingoCards: []
   };
 };
 
@@ -38,76 +35,63 @@ const reducer = (
   state: BingoStateInterface,
   action: BingoDispathInterface
 ): BingoStateInterface => {
-  const {
-    status,
-    difficulty,
-    tableCards,
-    showedCards,
-    selectedCards,
-    bingoCards,
-  } = state;
+  const { status, difficulty, tableCards, showedCards, selectedCards, bingoCards } = state;
 
   switch (action.type) {
-    case "initiate-game":
+    case 'initiate-game':
       return initialState();
 
-    case "start-game":
+    case 'start-game':
       return {
         ...state,
-        status: "started",
+        status: 'started'
       };
 
-    case "restart-game":
+    case 'restart-game':
       return initialState();
 
-    case "show-card":
+    case 'show-card':
       let card = selectNewItem(cards, showedCards);
-      if (
-        showedCards.length === difficulty ||
-        card === null ||
-        status === "initiated"
-      ) {
+      if (showedCards.length === difficulty || card === null || status === 'initiated') {
         clearInterval(action.interval as NodeJS.Timeout);
         return state;
       }
 
       return {
         ...state,
-        showedCards: [card, ...showedCards],
+        showedCards: [card, ...showedCards]
       };
 
-    case "select-card":
+    case 'select-card':
       return {
         ...state,
-        selectedCards: [...selectedCards, action.card as string],
+        selectedCards: [...selectedCards, action.card as string]
       };
 
-    case "check-bingo":
+    case 'check-bingo':
       let newBingoCards = getBingoCards(tableCards, selectedCards);
       if (newBingoCards.length !== bingoCards.length) {
-        console.log("new bingo");
+        console.log('new bingo');
       }
       return {
         ...state,
-        bingoCards: newBingoCards,
+        bingoCards: newBingoCards
       };
 
-    case "game-speed":
+    case 'game-speed':
       return {
         ...state,
-        speed: action.speed as number,
+        speed: action.speed as number
       };
 
-    case "game-difficulty":
+    case 'game-difficulty':
       return {
         ...state,
-        difficulty: action.difficulty as number,
+        difficulty: action.difficulty as number
       };
 
     default: {
-      throw new Error(
-        `Unhandled action type : ${action.type} - inside useGameReducer`
-      );
+      throw new Error(`Unhandled action type : ${action.type} - inside useGameReducer`);
     }
   }
 };
