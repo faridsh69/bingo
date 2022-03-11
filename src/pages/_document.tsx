@@ -10,13 +10,11 @@ export default function Document() {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
         <meta name="description" content="Bingo application is a simple game" />
         <meta name="keywords" content="Bingo, Game" />
-
         <link rel="manifest" href="/manifest.json" />
-        <link href="/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link href="/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <body>
