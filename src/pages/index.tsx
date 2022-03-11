@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -7,6 +6,7 @@ import { config } from '../configs';
 import { useGameReducer } from '../hooks/useBingoReducer';
 import { useSnackbar } from '../hooks/useSnackbar';
 import { Header } from '../components/Header';
+import { Reward } from '../components/Reward';
 import { SideBar } from '../components/SideBar';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 
@@ -53,13 +53,11 @@ const Index: NextPage = () => {
         <title>Bingo App</title>
       </Head>
       <Header state={state} dispatch={dispatch} openSnackbar={openSnackbar} />
+      {bingoCards.length ? <Reward /> : ''}
       <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <SideBar showedCards={showedCards} />
-        </Grid>
-        <Grid item xs={8}>
+        <Grid item md={8}>
           <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table>
               <TableBody>
                 {tableCards.map(row => (
                   <TableRow key={JSON.stringify(row)}>
@@ -83,6 +81,9 @@ const Index: NextPage = () => {
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+        <Grid item md={4}>
+          <SideBar showedCards={showedCards} />
         </Grid>
       </Grid>
     </>

@@ -35,7 +35,7 @@ const reducer = (
   state: BingoStateInterface,
   action: BingoDispathInterface
 ): BingoStateInterface => {
-  const { status, difficulty, tableCards, showedCards, selectedCards, bingoCards } = state;
+  const { status, difficulty, tableCards, showedCards, selectedCards } = state;
 
   switch (action.type) {
     case 'initiate-game':
@@ -69,13 +69,9 @@ const reducer = (
       };
 
     case 'check-bingo':
-      const newBingoCards = getBingoCards(tableCards, selectedCards);
-      if (newBingoCards.length !== bingoCards.length) {
-        // console.log('new bingo');
-      }
       return {
         ...state,
-        bingoCards: newBingoCards
+        bingoCards: getBingoCards(tableCards, selectedCards)
       };
 
     case 'game-speed':

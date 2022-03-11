@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, MenuItem, Select, SelectChangeEvent, Stack } from '@mui/material';
+import { Button, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import { config } from '../configs';
 import { HeaderPropsInterface } from '../interfaces/HeaderPropsInterface';
@@ -46,41 +46,42 @@ export const Header: FC<HeaderPropsInterface> = props => {
   };
 
   return (
-    <Stack direction="row" spacing={5} mb={4}>
-      <Image src="/logo.png" alt="logo" width={134} height={50} />
-      {status === 'initiated' ? (
-        <Button variant="contained" color="success" onClick={start}>
-          START
-        </Button>
-      ) : (
-        <Button variant="contained" color="error" onClick={restart}>
-          RESTART
-        </Button>
-      )}
-      <Select
-        onChange={changeSpeed}
-        value={speed}
-        disabled={status !== 'initiated'}
-        sx={{ width: '100px' }}
-      >
-        {speeds.map(speed => (
-          <MenuItem key={speed.value} value={speed.value}>
-            {speed.label}
-          </MenuItem>
-        ))}
-      </Select>
-      <Select
-        onChange={changeDifficulty}
-        value={difficulty}
-        disabled={status !== 'initiated'}
-        sx={{ width: '150px' }}
-      >
-        {difficulties.map(difficulty => (
-          <MenuItem key={difficulty.value} value={difficulty.value}>
-            {difficulty.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </Stack>
+    <Grid container spacing={1} mb={2}>
+      <Grid item md={2} sm={3}>
+        <Image src="/logo.png" alt="logo" width={134} height={50} />
+      </Grid>
+      <Grid item sm={2}>
+        {status === 'initiated' ? (
+          <Button variant="contained" color="success" onClick={start}>
+            START
+          </Button>
+        ) : (
+          <Button variant="contained" color="error" onClick={restart}>
+            RESTART
+          </Button>
+        )}
+      </Grid>
+      <Grid item sm={7}>
+        <Select
+          onChange={changeSpeed}
+          value={speed}
+          disabled={status !== 'initiated'}
+          sx={{ mr: 2 }}
+        >
+          {speeds.map(speed => (
+            <MenuItem key={speed.value} value={speed.value}>
+              {speed.label}
+            </MenuItem>
+          ))}
+        </Select>
+        <Select onChange={changeDifficulty} value={difficulty} disabled={status !== 'initiated'}>
+          {difficulties.map(difficulty => (
+            <MenuItem key={difficulty.value} value={difficulty.value}>
+              {difficulty.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </Grid>
+    </Grid>
   );
 };
