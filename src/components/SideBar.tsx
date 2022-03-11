@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Card, CardContent, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Card, CardContent, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 import { config } from '../configs';
 import { showedCardsPropsInterface } from '../interfaces/showedCardsPropsInterface';

@@ -8,15 +8,7 @@ import { useGameReducer } from '../hooks/useBingoReducer';
 import { useSnackbar } from '../hooks/useSnackbar';
 import { Header } from '../components/Header';
 import { SideBar } from '../components/SideBar';
-import {
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow
-} from '@mui/material';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 
 const Index: NextPage = () => {
   const [state, dispatch] = useGameReducer();

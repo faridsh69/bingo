@@ -3,10 +3,10 @@ import { cards } from '../mocks/cards';
 
 export const createTableCards = (): string[][] => {
   const { dimention } = config;
-  let selectedCards: string[] = [];
-  let table: string[][] = [];
-  let i: number = 0;
-  let j: number = 0;
+  const selectedCards: string[] = [];
+  const table: string[][] = [];
+  let i = 0;
+  let j = 0;
   let row: string[] = [];
   let card: string;
 
@@ -40,7 +40,7 @@ export const selectNewItem = (items: string[], selectedItems: string[]): string 
   if (!restOfItems) {
     return null;
   }
-  let randomIndex: number = Math.floor(Math.random() * restOfItems.length);
+  const randomIndex: number = Math.floor(Math.random() * restOfItems.length);
 
   return restOfItems[randomIndex];
 };
@@ -48,7 +48,7 @@ export const selectNewItem = (items: string[], selectedItems: string[]): string 
 export const getBingoCards = (tableCards: string[][], selectedCards: string[]): string[] => {
   const { dimention } = config;
   let bingoCards: string[] = [];
-  let i: number = 0;
+  let i = 0;
   for (i = 0; i < dimention; i++) {
     bingoCards = checkBingoRows(i, selectedCards, tableCards, bingoCards);
     bingoCards = checkBingoColumns(i, selectedCards, tableCards, bingoCards);

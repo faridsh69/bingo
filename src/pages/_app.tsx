@@ -1,10 +1,11 @@
 import { Container } from '@mui/material';
 import React from 'react';
+import type { AppProps } from 'next/app';
 
 import { SnackbarProvider } from '../contexts/SnackbarContext';
 import '../styles/bingo.css';
 
-export default function Application({ Component, pageProps }: { Component: any; pageProps: any }) {
+export default function Application({ Component, pageProps }: AppProps) {
   return (
     <React.StrictMode>
       <SnackbarProvider>

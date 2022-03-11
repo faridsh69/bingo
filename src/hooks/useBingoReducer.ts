@@ -51,7 +51,7 @@ const reducer = (
       return initialState();
 
     case 'show-card':
-      let card = selectNewItem(cards, showedCards);
+      const card = selectNewItem(cards, showedCards);
       if (showedCards.length === difficulty || card === null || status === 'initiated') {
         clearInterval(action.interval as NodeJS.Timeout);
         return state;
@@ -69,9 +69,9 @@ const reducer = (
       };
 
     case 'check-bingo':
-      let newBingoCards = getBingoCards(tableCards, selectedCards);
+      const newBingoCards = getBingoCards(tableCards, selectedCards);
       if (newBingoCards.length !== bingoCards.length) {
-        console.log('new bingo');
+        // console.log('new bingo');
       }
       return {
         ...state,

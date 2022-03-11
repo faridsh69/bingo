@@ -10,6 +10,7 @@ const defaultSnackbarProps: SnackbarProps = {
   status: 'info'
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const CTX_INITIAL_VALUE = [() => {}] as const;
 
 export const SnackbarContext = createContext<SnackbarContextType>(CTX_INITIAL_VALUE);

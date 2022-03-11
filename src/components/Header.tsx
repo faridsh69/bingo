@@ -47,7 +47,7 @@ export const Header: FC<HeaderPropsInterface> = props => {
 
   return (
     <Stack direction="row" spacing={5} mb={4}>
-      <Image src="/logo.png" width={134} height={50} />
+      <Image src="/logo.png" alt="logo" width={134} height={50} />
       {status === 'initiated' ? (
         <Button variant="contained" color="success" onClick={start}>
           START
