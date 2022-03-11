@@ -26,6 +26,7 @@ body {
 }
 .reward {
   font-size: 4rem;
+  text-align: center;
 }
 @media screen and (max-width: 600px) {
   .MuiTableCell-root {

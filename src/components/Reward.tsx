@@ -6,14 +6,14 @@ export const Reward: FC = () => {
     loop: true,
     to: [
       { opacity: 1, color: '#ffaaee' },
-      { opacity: 0.5, color: 'rgb(12,26,19)' }
+      { opacity: 0.5, color: 'rgb(12,30,150)' }
     ],
     from: { opacity: 0.3, color: 'red' }
   });
 
   return (
     <animated.div style={bingoStyles} className="reward">
-      Bingo
+      *** Bingo *** <br /> You are amazing, You will be in mars with ELON
     </animated.div>
   );
 };
