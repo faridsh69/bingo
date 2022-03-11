@@ -1,37 +1,19 @@
 import { config } from "../configs";
 import { cards } from "../mocks/cards";
 
-export function selectNewItem(
-  items: string[],
-  selectedItems: string[]
-): string | null {
-  const restOfItems = items.filter((item) => {
-    return !selectedItems.includes(item);
-  });
-
-  if (!restOfItems) {
-    console.log("All of cards are selected");
-    return null;
-  }
-  let randomIndex = Math.floor(Math.random() * restOfItems.length);
-
-  return restOfItems[randomIndex];
-}
-
-export function createTableCards(): string[][] {
-  const { dimention, freeCardIndex, freeCardValue } = config;
+export const createTableCards = (): string[][] => {
+  const { dimention } = config;
   let selectedCards: string[] = [];
   let table: string[][] = [];
   let i: number = 0;
   let j: number = 0;
+  let row: string[] = [];
+  let card: string;
 
   for (i = 0; i < dimention; i++) {
-    let row = [];
+    row = [];
     for (j = 0; j < dimention; j++) {
-      let card: string | null = freeCardValue;
-      if (i !== freeCardIndex || j !== freeCardIndex) {
-        card = selectNewItem(cards, selectedCards);
-      }
+      card = selectTableCard(i, j, selectedCards);
       if (card === null) break;
       selectedCards.push(card);
       row.push(card);
@@ -40,68 +22,156 @@ export function createTableCards(): string[][] {
   }
 
   return table;
-}
+};
+
+const selectTableCard = (
+  i: number,
+  j: number,
+  selectedCards: string[]
+): string => {
+  const { freeCardIndex, freeCardValue } = config;
+  let card: string | null = freeCardValue;
+  if (i !== freeCardIndex || j !== freeCardIndex) {
+    card = selectNewItem(cards, selectedCards);
+  }
+  return card as string;
+};
+
+export const selectNewItem = (
+  items: string[],
+  selectedItems: string[]
+): string | null => {
+  const restOfItems: string[] = items.filter((item) => {
+    return !selectedItems.includes(item);
+  });
+  if (!restOfItems) {
+    return null;
+  }
+  let randomIndex: number = Math.floor(Math.random() * restOfItems.length);
+
+  return restOfItems[randomIndex];
+};
 
 export const getBingoCards = (
-  tableCards: string[],
+  tableCards: string[][],
   selectedCards: string[]
 ): string[] => {
   const { dimention } = config;
   let bingoCards: string[] = [];
-  let bingo: boolean = true;
   let i: number = 0;
-  let j: number = 0;
-  let k: number = 0;
   for (i = 0; i < dimention; i++) {
-    bingo = true;
-    for (j = 0; j < dimention; j++) {
-      if (!selectedCards.includes(tableCards[i][j])) {
-        bingo = false;
-        break;
-      }
-    }
-    if (bingo) {
-      for (let card of tableCards[i]) {
-        bingoCards.push(card);
-      }
-    }
+    bingoCards = checkBingoRows(i, selectedCards, tableCards, bingoCards);
+    bingoCards = checkBingoColumns(i, selectedCards, tableCards, bingoCards);
+  }
+  bingoCards = checkBingoDiagonalDecreasing(
+    selectedCards,
+    tableCards,
+    bingoCards
+  );
+  bingoCards = checkBingoDiagonalIncreasing(
+    selectedCards,
+    tableCards,
+    bingoCards
+  );
 
-    bingo = true;
-    for (j = 0; j < dimention; j++) {
-      if (!selectedCards.includes(tableCards[j][i])) {
-        bingo = false;
-        break;
-      }
-    }
-    if (bingo) {
-      for (k = 0; k < dimention; k++) {
-        bingoCards.push(tableCards[k][i]);
-      }
+  return bingoCards;
+};
+
+const checkBingoRows = (
+  i: number,
+  selectedCards: string[],
+  tableCards: string[][],
+  bingoCards: string[]
+): string[] => {
+  const { dimention } = config;
+  let bingo = true;
+  let j = 0;
+  let k = 0;
+
+  for (j; j < dimention; j++) {
+    if (!selectedCards.includes(tableCards[i][j])) {
+      bingo = false;
+      break;
     }
   }
 
-  bingo = true;
-  for (i = 0; i < dimention; i++) {
+  if (bingo) {
+    for (k; k < dimention; k++) {
+      bingoCards.push(tableCards[i][k]);
+    }
+  }
+
+  return bingoCards;
+};
+
+const checkBingoColumns = (
+  i: number,
+  selectedCards: string[],
+  tableCards: string[][],
+  bingoCards: string[]
+): string[] => {
+  const { dimention } = config;
+  let bingo = true;
+  let j = 0;
+  let k = 0;
+
+  for (j; j < dimention; j++) {
+    if (!selectedCards.includes(tableCards[j][i])) {
+      bingo = false;
+      break;
+    }
+  }
+
+  if (bingo) {
+    for (k; k < dimention; k++) {
+      bingoCards.push(tableCards[k][i]);
+    }
+  }
+
+  return bingoCards;
+};
+
+const checkBingoDiagonalDecreasing = (
+  selectedCards: string[],
+  tableCards: string[][],
+  bingoCards: string[]
+): string[] => {
+  const { dimention } = config;
+  let bingo = true;
+  let i = 0;
+  let k = 0;
+  for (i; i < dimention; i++) {
     if (!selectedCards.includes(tableCards[i][i])) {
       bingo = false;
       break;
     }
   }
   if (bingo) {
-    for (k = 0; k < dimention; k++) {
+    for (k; k < dimention; k++) {
       bingoCards.push(tableCards[k][k]);
     }
   }
 
-  bingo = true;
-  for (i = 0; i < dimention; i++) {
+  return bingoCards;
+};
+
+const checkBingoDiagonalIncreasing = (
+  selectedCards: string[],
+  tableCards: string[][],
+  bingoCards: string[]
+): string[] => {
+  const { dimention } = config;
+  let bingo = true;
+  let i = 0;
+  let k = 0;
+  for (i; i < dimention; i++) {
     if (!selectedCards.includes(tableCards[i][dimention - i - 1])) {
       bingo = false;
       break;
     }
   }
   if (bingo) {
-    for (k = 0; k < dimention; k++) {
+    for (k; k < dimention; k++) {
       bingoCards.push(tableCards[k][dimention - k - 1]);
     }
   }

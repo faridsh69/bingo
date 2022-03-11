@@ -1,4 +1,7 @@
-export const config = {
+import ConfigInterface from "../interfaces/ConfigInterface";
+
+export const config: ConfigInterface = {
+  totalCards: 75,
   dimention: 5,
   freeCardIndex: 2,
   freeCardValue: "******",

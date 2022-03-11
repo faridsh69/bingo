@@ -1,4 +1,4 @@
-import { Dispatch, useReducer } from "react";
+import { Dispatch, Reducer, useReducer } from "react";
 
 import { config } from "../configs";
 import { cards } from "../mocks/cards";
@@ -7,39 +7,18 @@ import {
   selectNewItem,
   getBingoCards,
 } from "../helpers/bingo";
+import { BingoStateInterface } from "../interfaces/BingoStateInterface";
+import { BingoDispathInterface } from "../interfaces/BingoDispathInterface";
 
 export function useGameReducer(): [
   state: BingoStateInterface,
   dispatch: Dispatch<BingoDispathInterface>
 ] {
-  const [state, dispatch] = useReducer(reducer, initialState());
+  const [state, dispatch] = useReducer<
+    Reducer<BingoStateInterface, BingoDispathInterface>
+  >(reducer, initialState());
 
   return [state, dispatch];
-}
-
-export interface BingoStateInterface {
-  status: string;
-  speed: number;
-  difficulty: number;
-  tableCards: string[][];
-  showedCards: string[];
-  selectedCards: string[];
-  bingoCards: string[];
-}
-export interface BingoDispathInterface {
-  type:
-    | "initiate-game"
-    | "start-game"
-    | "restart-game"
-    | "show-card"
-    | "select-card"
-    | "check-bingo"
-    | "game-speed"
-    | "game-difficulty";
-  interval?: NODEJS.Timeout;
-  card?: string;
-  difficulty?: number;
-  speed?: number;
 }
 
 const initialState = (): BingoStateInterface => {
@@ -88,7 +67,7 @@ const reducer = (
         card === null ||
         status === "initiated"
       ) {
-        clearInterval(action.interval);
+        clearInterval(action.interval as NodeJS.Timeout);
         return state;
       }
 
@@ -100,7 +79,7 @@ const reducer = (
     case "select-card":
       return {
         ...state,
-        selectedCards: [...selectedCards, action.card],
+        selectedCards: [...selectedCards, action.card as string],
       };
 
     case "check-bingo":
@@ -116,13 +95,13 @@ const reducer = (
     case "game-speed":
       return {
         ...state,
-        speed: action.speed,
+        speed: action.speed as number,
       };
 
     case "game-difficulty":
       return {
         ...state,
-        difficulty: action.difficulty,
+        difficulty: action.difficulty as number,
       };
 
     default: {

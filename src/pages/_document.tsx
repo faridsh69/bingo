@@ -5,9 +5,9 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="/icon-512x512.png"></link>
+        <link rel="shortcut icon" href="/favicon.png"></link>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#fff" />
       </Head>
       <body>

@@ -1,8 +1,14 @@
-import type { AppProps } from "next/app";
+import React from "react";
+
+import { SnackbarProvider } from "../contexts/SnackbarContext";
 import "../styles/bingo.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export default function Application({ Component, pageProps }: { Component: any; pageProps: any }) {
+  return (
+    <React.StrictMode>
+      <SnackbarProvider>
+        <Component {...pageProps} />
+      </SnackbarProvider>
+    </React.StrictMode>
+  );
 }
-
-export default MyApp;
