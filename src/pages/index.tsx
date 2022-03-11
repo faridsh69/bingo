@@ -8,6 +8,7 @@ import { useGameReducer } from "../hooks/useBingoReducer";
 import { useSnackbar } from "../hooks/useSnackbar";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/SideBar";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 const Index: NextPage = () => {
   const [state, dispatch] = useGameReducer();
@@ -51,24 +52,19 @@ const Index: NextPage = () => {
       <Head>
         <title>Bingo App</title>
       </Head>
-      <div className="App">
-        <Header state={state} dispatch={dispatch} openSnackbar={openSnackbar} />
-        <div style={{ width: "100%" }}>
-          <div style={{ width: "20%", display: "inline-block" }}>
-            <SideBar showedCards={showedCards} />
-          </div>
-          <div style={{ width: "60%", display: "inline-block", verticalAlign: "top" }}>
-            <table>
-              <thead>
-                <tr>
-                  <th>B</th> <th>I</th> <th>N</th> <th>G</th> <th>O</th>
-                </tr>
-              </thead>
-              <tbody>
+      <Header state={state} dispatch={dispatch} openSnackbar={openSnackbar} />
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <SideBar showedCards={showedCards} />
+        </Grid>
+        <Grid item xs={8}>
+          <TableContainer>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableBody>
                 {tableCards.map((row) => (
-                  <tr key={JSON.stringify(row)}>
+                  <TableRow key={JSON.stringify(row)}>
                     {row.map((card) => (
-                      <td
+                      <TableCell
                         key={card}
                         onClick={selectCard}
                         className={
@@ -80,15 +76,15 @@ const Index: NextPage = () => {
                         }
                       >
                         {card}
-                      </td>
+                      </TableCell>
                     ))}
-                  </tr>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
     </>
   );
 };

@@ -57,14 +57,14 @@ export const Header: FC<HeaderPropsInterface> = (props) => {
           RESTART
         </Button>
       )}
-      <Select onChange={changeSpeed} value={speed} disabled={status !== "initiated"}>
+      <Select onChange={changeSpeed} value={speed} disabled={status !== "initiated"} sx={{ width: "100px" }}>
         {speeds.map((speed) => (
           <MenuItem key={speed.value} value={speed.value}>
             {speed.label}
           </MenuItem>
         ))}
       </Select>
-      <Select onChange={changeDifficulty} value={difficulty} disabled={status !== "initiated"}>
+      <Select onChange={changeDifficulty} value={difficulty} disabled={status !== "initiated"} sx={{ width: "150px" }}>
         {difficulties.map((difficulty) => (
           <MenuItem key={difficulty.value} value={difficulty.value}>
             {difficulty.label}

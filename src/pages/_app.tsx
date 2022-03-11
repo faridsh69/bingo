@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import React from "react";
 
 import { SnackbarProvider } from "../contexts/SnackbarContext";
@@ -7,7 +8,9 @@ export default function Application({ Component, pageProps }: { Component: any; 
   return (
     <React.StrictMode>
       <SnackbarProvider>
-        <Component {...pageProps} />
+        <Container>
+          <Component {...pageProps} />
+        </Container>
       </SnackbarProvider>
     </React.StrictMode>
   );
