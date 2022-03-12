@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
 import { SnackbarContext } from '../contexts/SnackbarContext';
-import { SnackbarContextType } from '../interfaces/SnackbarContextType';
+import { SnackbarContextValueInterface } from '../interfaces/SnackbarContextValueInterface';
 
-export const useSnackbar = (): SnackbarContextType => useContext(SnackbarContext);
+export const useSnackbar = (): SnackbarContextValueInterface => useContext(SnackbarContext);

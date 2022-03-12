@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Button, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import { config } from '../configs';
 import { HeaderPropsInterface } from '../interfaces/HeaderPropsInterface';
 import Image from 'next/image';
 
-export const Header: FC<HeaderPropsInterface> = props => {
+const Header: FC<HeaderPropsInterface> = props => {
   const { state, dispatch, openSnackbar } = props;
   const { status, speed, difficulty } = state;
   const { speeds, difficulties } = config;
@@ -22,7 +22,7 @@ export const Header: FC<HeaderPropsInterface> = props => {
       dispatch({ type: 'restart-game' });
       openSnackbar({
         message: 'Game Restarted.',
-        status: 'success'
+        severity: 'success'
       });
     }
   };
@@ -31,7 +31,7 @@ export const Header: FC<HeaderPropsInterface> = props => {
     const difficulty = event.target.value as string;
     openSnackbar({
       message: `You will have ${difficulty}/${config.totalCards} cards.`,
-      status: 'info'
+      severity: 'info'
     });
     dispatch({ type: 'game-difficulty', difficulty: parseInt(difficulty) });
   };
@@ -40,7 +40,7 @@ export const Header: FC<HeaderPropsInterface> = props => {
     const speed = event.target.value as string;
     openSnackbar({
       message: `Delay in showing cards changed to: ${speed}ms`,
-      status: 'info'
+      severity: 'info'
     });
     dispatch({ type: 'game-speed', speed: parseInt(speed) });
   };
@@ -85,3 +85,5 @@ export const Header: FC<HeaderPropsInterface> = props => {
     </Grid>
   );
 };
+
+export default memo(Header);

@@ -12,23 +12,30 @@ export function useGameReducer(): [
 ] {
   const [state, dispatch] = useReducer<Reducer<BingoStateInterface, BingoDispathInterface>>(
     reducer,
-    initialState()
+    defaultState()
   );
 
   return [state, dispatch];
 }
 
-const initialState = (): BingoStateInterface => {
+const defaultState = (): BingoStateInterface => {
   const { speeds, difficulties, freeCardValue } = config;
   return {
     status: 'initiated',
     speed: speeds[0].value,
     difficulty: difficulties[0].value,
-    tableCards: createTableCards(),
+    tableCards: [],
     showedCards: [],
     selectedCards: [freeCardValue],
     bingoCards: []
   };
+};
+
+const preparedState = (): BingoStateInterface => {
+  const initialState: BingoStateInterface = defaultState();
+  initialState.tableCards = createTableCards();
+
+  return initialState;
 };
 
 const reducer = (
@@ -38,8 +45,8 @@ const reducer = (
   const { status, difficulty, tableCards, showedCards, selectedCards } = state;
 
   switch (action.type) {
-    case 'initiate-game':
-      return initialState();
+    case 'prepare-game':
+      return preparedState();
 
     case 'start-game':
       return {
@@ -48,7 +55,7 @@ const reducer = (
       };
 
     case 'restart-game':
-      return initialState();
+      return preparedState();
 
     case 'show-card':
       const card = selectNewItem(cards, showedCards);

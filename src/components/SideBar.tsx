@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Card, CardContent, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 import { config } from '../configs';
@@ -25,3 +25,5 @@ export const SideBar: FC<showedCardsPropsInterface> = props => {
     </Card>
   );
 };
+
+export default memo(SideBar);

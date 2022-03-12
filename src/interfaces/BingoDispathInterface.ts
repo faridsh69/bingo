@@ -1,6 +1,6 @@
 export interface BingoDispathInterface {
   type:
-    | 'initiate-game'
+    | 'prepare-game'
     | 'start-game'
     | 'restart-game'
     | 'show-card'

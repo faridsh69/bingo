@@ -1,36 +1,40 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import Header from '../components/Header';
+import SideBar from '../components/SideBar';
 import { config } from '../configs';
 import { useGameReducer } from '../hooks/useBingoReducer';
 import { useSnackbar } from '../hooks/useSnackbar';
-import { Header } from '../components/Header';
 import { Reward } from '../components/Reward';
-import { SideBar } from '../components/SideBar';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 
 const Index: NextPage = () => {
   const [state, dispatch] = useGameReducer();
-  const [openSnackbar] = useSnackbar();
+  const openSnackbar = useSnackbar();
 
-  const { tableCards, showedCards, selectedCards, bingoCards } = state;
+  const { speed, difficulty, status, tableCards, showedCards, selectedCards, bingoCards } = state;
   const { bingoCardClassName, selectedCardClassName } = config;
 
-  useEffect(() => {
-    dispatch({ type: 'initiate-game' });
-  }, []);
+  const headerStateProp = useMemo(() => state, [speed, difficulty, status]);
 
   useEffect(() => {
-    dispatch({ type: 'check-bingo' });
-  }, [tableCards, selectedCards]);
+    dispatch({ type: 'prepare-game' });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (selectedCards.length > 1) {
+      dispatch({ type: 'check-bingo' });
+    }
+  }, [tableCards, selectedCards, dispatch]);
 
   const selectCard = (event: React.MouseEvent<HTMLElement>) => {
     const card = (event.target as HTMLElement).innerText;
     if (selectedCards.includes(card)) {
       openSnackbar({
         message: `Card is already selected: ${card}`,
-        status: 'info'
+        severity: 'info'
       });
 
       return;
@@ -38,7 +42,7 @@ const Index: NextPage = () => {
     if (!showedCards.includes(card)) {
       openSnackbar({
         message: `Selected Card is not in list of showed cards: ${card}`,
-        status: 'warning'
+        severity: 'warning'
       });
 
       return;
@@ -52,7 +56,7 @@ const Index: NextPage = () => {
       <Head>
         <title>Bingo App</title>
       </Head>
-      <Header state={state} dispatch={dispatch} openSnackbar={openSnackbar} />
+      <Header state={headerStateProp} dispatch={dispatch} openSnackbar={openSnackbar} />
       {bingoCards.length ? <Reward /> : ''}
       <Grid container spacing={2}>
         <Grid item md={8}>

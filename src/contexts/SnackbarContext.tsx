@@ -1,23 +1,26 @@
 import { Alert, Snackbar, Stack, Typography } from '@mui/material';
-import React, { createContext, FC, useMemo, useState } from 'react';
-import { SnackbarContextType } from '../interfaces/SnackbarContextType';
-import { SnackbarOption } from '../interfaces/SnackbarOption';
-import SnackbarProps from '../interfaces/SnackbarProps';
+import React, { createContext, FC, useCallback, useState } from 'react';
+import { SnackbarContextValueInterface } from '../interfaces/SnackbarContextValueInterface';
+import { SnackbarPropsInterface } from '../interfaces/SnackbarPropsInterface';
 
-const defaultSnackbarProps: SnackbarProps = {
+const defaultSnackbarProps: SnackbarPropsInterface = {
   open: false,
   message: '',
-  status: 'info'
+  severity: 'info'
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const CTX_INITIAL_VALUE = [() => {}] as const;
-
-export const SnackbarContext = createContext<SnackbarContextType>(CTX_INITIAL_VALUE);
+const defaultSnackbarContextValue: SnackbarContextValueInterface = (
+  props: SnackbarPropsInterface
+) => {
+  void props;
+};
+export const SnackbarContext = createContext<SnackbarContextValueInterface>(
+  defaultSnackbarContextValue
+);
 
 export const SnackbarProvider: FC = ({ children }) => {
-  const [snackbarProps, setSnackbarProps] = useState<SnackbarProps>(defaultSnackbarProps);
-  const { open, message, status } = snackbarProps;
+  const [snackbarProps, setSnackbarProps] = useState<SnackbarPropsInterface>(defaultSnackbarProps);
+  const { open, message, severity } = snackbarProps;
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -27,18 +30,18 @@ export const SnackbarProvider: FC = ({ children }) => {
     setSnackbarProps({ ...defaultSnackbarProps, open: false });
   };
 
-  const openSnackbar = (opt: SnackbarOption) => {
-    setSnackbarProps({ ...opt, open: true });
-  };
+  const openSnackbar = useCallback((props: SnackbarPropsInterface) => {
+    setSnackbarProps({ ...props, open: true });
+  }, []);
 
-  const contextValue: SnackbarContextType = useMemo(() => [openSnackbar] as const, []);
+  const contextValue: SnackbarContextValueInterface = openSnackbar;
 
   return (
     <SnackbarContext.Provider value={contextValue}>
       {children}
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} onClose={handleClose} autoHideDuration={3000}>
-          <Alert onClose={handleClose} severity={status} sx={{ width: '100%' }}>
+          <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
             <Typography>{message} </Typography>
           </Alert>
         </Snackbar>
