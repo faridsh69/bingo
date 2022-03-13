@@ -1,4 +1,6 @@
-export const cards: string[] = [
+import { CardType } from '@interfaces/CardType';
+
+export const cards: CardType[] = [
   'The Shawshank Redemption (1994)',
   'The Godfather (1972)',
   'The Dark Knight (2008)',

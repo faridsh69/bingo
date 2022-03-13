@@ -1,15 +1,14 @@
-import { Dispatch, Reducer, useReducer } from 'react';
+import { Reducer, useReducer } from 'react';
 
 import { config } from '../configs';
 import { cards } from '../mocks/cards';
 import { createTableCards, selectNewItem, getBingoCards } from '../helpers/bingo';
-import { BingoStateInterface } from '../interfaces/BingoStateInterface';
-import { BingoDispathInterface } from '../interfaces/BingoDispathInterface';
+import { BingoStateInterface } from '@interfaces/BingoStateInterface';
+import { BingoDispathInterface } from '@interfaces/BingoDispathInterface';
+import { GameReducerType } from '@interfaces/GameReducerType';
+import { CardType } from '@interfaces/CardType';
 
-export function useGameReducer(): [
-  state: BingoStateInterface,
-  dispatch: Dispatch<BingoDispathInterface>
-] {
+export function useGameReducer(): GameReducerType {
   const [state, dispatch] = useReducer<Reducer<BingoStateInterface, BingoDispathInterface>>(
     reducer,
     defaultState()
@@ -72,7 +71,7 @@ const reducer = (
     case 'select-card':
       return {
         ...state,
-        selectedCards: [...selectedCards, action.card as string]
+        selectedCards: [...selectedCards, action.card as CardType]
       };
 
     case 'check-bingo':

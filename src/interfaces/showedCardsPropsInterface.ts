@@ -1,3 +1,5 @@
+import { CardType } from './CardType';
+
 export interface showedCardsPropsInterface {
-  showedCards: string[];
+  showedCards: CardType[];
 }

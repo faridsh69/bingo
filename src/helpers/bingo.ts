@@ -1,14 +1,15 @@
+import { CardType } from '@interfaces/CardType';
 import { config } from '../configs';
 import { cards } from '../mocks/cards';
 
-export const createTableCards = (): string[][] => {
+export const createTableCards = (): CardType[][] => {
   const { dimention } = config;
-  const selectedCards: string[] = [];
-  const table: string[][] = [];
+  const selectedCards: CardType[] = [];
+  const table: CardType[][] = [];
   let i = 0;
   let j = 0;
-  let row: string[] = [];
-  let card: string;
+  let row: CardType[] = [];
+  let card: CardType;
 
   for (i = 0; i < dimention; i++) {
     row = [];
@@ -24,17 +25,17 @@ export const createTableCards = (): string[][] => {
   return table;
 };
 
-const selectTableCard = (i: number, j: number, selectedCards: string[]): string => {
+const selectTableCard = (i: number, j: number, selectedCards: CardType[]): CardType => {
   const { freeCardIndex, freeCardValue } = config;
-  let card: string | null = freeCardValue;
+  let card: CardType | null = freeCardValue;
   if (i !== freeCardIndex || j !== freeCardIndex) {
     card = selectNewItem(cards, selectedCards);
   }
-  return card as string;
+  return card as CardType;
 };
 
-export const selectNewItem = (items: string[], selectedItems: string[]): string | null => {
-  const restOfItems: string[] = items.filter(item => {
+export const selectNewItem = (items: CardType[], selectedItems: CardType[]): CardType | null => {
+  const restOfItems: CardType[] = items.filter(item => {
     return !selectedItems.includes(item);
   });
   if (!restOfItems) {
@@ -45,9 +46,9 @@ export const selectNewItem = (items: string[], selectedItems: string[]): string 
   return restOfItems[randomIndex];
 };
 
-export const getBingoCards = (tableCards: string[][], selectedCards: string[]): string[] => {
+export const getBingoCards = (tableCards: CardType[][], selectedCards: CardType[]): CardType[] => {
   const { dimention } = config;
-  let bingoCards: string[] = [];
+  let bingoCards: CardType[] = [];
   let i = 0;
   for (i = 0; i < dimention; i++) {
     bingoCards = checkBingoRows(i, selectedCards, tableCards, bingoCards);
@@ -61,10 +62,10 @@ export const getBingoCards = (tableCards: string[][], selectedCards: string[]): 
 
 const checkBingoRows = (
   i: number,
-  selectedCards: string[],
-  tableCards: string[][],
-  bingoCards: string[]
-): string[] => {
+  selectedCards: CardType[],
+  tableCards: CardType[][],
+  bingoCards: CardType[]
+): CardType[] => {
   const { dimention } = config;
   let bingo = true;
   let j = 0;
@@ -88,10 +89,10 @@ const checkBingoRows = (
 
 const checkBingoColumns = (
   i: number,
-  selectedCards: string[],
-  tableCards: string[][],
-  bingoCards: string[]
-): string[] => {
+  selectedCards: CardType[],
+  tableCards: CardType[][],
+  bingoCards: CardType[]
+): CardType[] => {
   const { dimention } = config;
   let bingo = true;
   let j = 0;
@@ -114,10 +115,10 @@ const checkBingoColumns = (
 };
 
 const checkBingoDiagonalDecreasing = (
-  selectedCards: string[],
-  tableCards: string[][],
-  bingoCards: string[]
-): string[] => {
+  selectedCards: CardType[],
+  tableCards: CardType[][],
+  bingoCards: CardType[]
+): CardType[] => {
   const { dimention } = config;
   let bingo = true;
   let i = 0;
@@ -138,10 +139,10 @@ const checkBingoDiagonalDecreasing = (
 };
 
 const checkBingoDiagonalIncreasing = (
-  selectedCards: string[],
-  tableCards: string[][],
-  bingoCards: string[]
-): string[] => {
+  selectedCards: CardType[],
+  tableCards: CardType[][],
+  bingoCards: CardType[]
+): CardType[] => {
   const { dimention } = config;
   let bingo = true;
   let i = 0;

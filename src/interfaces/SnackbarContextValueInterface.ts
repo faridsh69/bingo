@@ -1,3 +1,5 @@
 import { SnackbarPropsInterface } from './SnackbarPropsInterface';
 
-export type SnackbarContextValueInterface = (props: SnackbarPropsInterface) => void;
+export interface SnackbarContextValueInterface {
+  (props: SnackbarPropsInterface): void;
+}

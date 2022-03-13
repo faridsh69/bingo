@@ -1,9 +1,9 @@
 import { FC, memo } from 'react';
+import Image from 'next/image';
 import { Button, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import { config } from '../configs';
-import { HeaderPropsInterface } from '../interfaces/HeaderPropsInterface';
-import Image from 'next/image';
+import { HeaderPropsInterface } from '@interfaces/HeaderPropsInterface';
 
 const Header: FC<HeaderPropsInterface> = props => {
   const { state, dispatch, openSnackbar } = props;
