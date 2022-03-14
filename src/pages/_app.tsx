@@ -2,17 +2,19 @@ import { Container } from "@mui/material";
 import React from "react";
 import type { AppProps } from "next/app";
 
+import { MuiProvider } from "@contexts/MuiContext";
 import { SnackbarProvider } from "@contexts/SnackbarContext";
-import "@styles/global.css";
 
 export default function Application({ Component, pageProps }: AppProps) {
   return (
     <React.StrictMode>
-      <SnackbarProvider>
-        <Container>
-          <Component {...pageProps} />
-        </Container>
-      </SnackbarProvider>
+      <MuiProvider>
+        <SnackbarProvider>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </SnackbarProvider>
+      </MuiProvider>
     </React.StrictMode>
   );
 }

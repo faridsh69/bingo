@@ -2,11 +2,11 @@ import { useEffect, useMemo } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import Header from "@components/Header";
-import SideBar from "@components/SideBar";
 import { config } from "@configs/index";
 import { useGameReducer } from "@hooks/useBingoReducer";
 import { useSnackbar } from "@hooks/useSnackbar";
+import Header from "@components/Header";
+import SideBar from "@components/SideBar";
 import { Reward } from "@components/Reward";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 
