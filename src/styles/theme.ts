@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material/styles";
+import { Interpolation } from "@emotion/react";
+import { Theme } from "@mui/system";
 
-export const themeGlobalStyles = {
+export const themeGlobalStyles: Interpolation<Theme> = {
   ":root": {
     "--body-bg": "rgb(235, 240, 245)",
     "--cell-bg": "rgb(235, 154, 235, 0.1)",
