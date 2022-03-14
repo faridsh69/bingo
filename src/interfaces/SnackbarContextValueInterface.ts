@@ -1,4 +1,4 @@
-import { SnackbarPropsInterface } from './SnackbarPropsInterface';
+import { SnackbarPropsInterface } from "./SnackbarPropsInterface";
 
 export interface SnackbarContextValueInterface {
   (props: SnackbarPropsInterface): void;

@@ -1,14 +1,14 @@
-import { useEffect, useMemo } from 'react';
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import { useEffect, useMemo } from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
 
-import Header from '@components/Header';
-import SideBar from '@components/SideBar';
-import { config } from '@configs/index';
-import { useGameReducer } from '@hooks/useBingoReducer';
-import { useSnackbar } from '@hooks/useSnackbar';
-import { Reward } from '@components/Reward';
-import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import Header from "@components/Header";
+import SideBar from "@components/SideBar";
+import { config } from "@configs/index";
+import { useGameReducer } from "@hooks/useBingoReducer";
+import { useSnackbar } from "@hooks/useSnackbar";
+import { Reward } from "@components/Reward";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 
 const Index: NextPage = () => {
   const [state, dispatch] = useGameReducer();
@@ -20,12 +20,12 @@ const Index: NextPage = () => {
   const headerStateProp = useMemo(() => state, [speed, difficulty, status]);
 
   useEffect(() => {
-    dispatch({ type: 'prepare-game' });
+    dispatch({ type: "prepare-game" });
   }, [dispatch]);
 
   useEffect(() => {
     if (selectedCards.length > 1) {
-      dispatch({ type: 'check-bingo' });
+      dispatch({ type: "check-bingo" });
     }
   }, [tableCards, selectedCards, dispatch]);
 
@@ -34,7 +34,7 @@ const Index: NextPage = () => {
     if (selectedCards.includes(card)) {
       openSnackbar({
         message: `Card is already selected: ${card}`,
-        severity: 'info'
+        severity: "info",
       });
 
       return;
@@ -42,13 +42,13 @@ const Index: NextPage = () => {
     if (!showedCards.includes(card)) {
       openSnackbar({
         message: `Selected Card is not in list of showed cards: ${card}`,
-        severity: 'warning'
+        severity: "warning",
       });
 
       return;
     }
 
-    dispatch({ type: 'select-card', card });
+    dispatch({ type: "select-card", card });
   };
 
   return (
@@ -57,7 +57,7 @@ const Index: NextPage = () => {
         <title>Bingo App</title>
       </Head>
       <Header state={headerStateProp} dispatch={dispatch} openSnackbar={openSnackbar} />
-      {bingoCards.length ? <Reward /> : ''}
+      {bingoCards.length ? <Reward /> : ""}
       <Grid container spacing={2}>
         <Grid item md={8}>
           <TableContainer>
@@ -74,7 +74,7 @@ const Index: NextPage = () => {
                             ? bingoCardClassName
                             : selectedCards.includes(card)
                             ? selectedCardClassName
-                            : ' '
+                            : " "
                         }
                       >
                         {card}

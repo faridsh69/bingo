@@ -1,14 +1,14 @@
-import { FC, memo } from 'react';
-import { Card, CardContent, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { FC, memo } from "react";
+import { Card, CardContent, List, ListItem, ListItemText, Typography } from "@mui/material";
 
-import { config } from '@configs/index';
-import { showedCardsPropsInterface } from '@interfaces/showedCardsPropsInterface';
+import { config } from "@configs/index";
+import { showedCardsPropsInterface } from "@interfaces/showedCardsPropsInterface";
 
 export const SideBar: FC<showedCardsPropsInterface> = props => {
   const { showedCards } = props;
   const { totalCards } = config;
   return (
-    <Card sx={{ minWidth: 275, maxHeight: 500, overflow: 'auto' }}>
+    <Card sx={{ minWidth: 275, maxHeight: 500, overflow: "auto" }}>
       <CardContent>
         <Typography
           variant="h6"

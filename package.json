@@ -36,7 +36,6 @@
     "**/*.(ts|js)?(x)": [
       "npm run lint",
       "prettier --write"
-    ],
-    "*.{ts,tsx}": "eslint --cache --fix"
+    ]
   }
 }

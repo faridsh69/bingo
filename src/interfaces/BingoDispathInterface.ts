@@ -1,14 +1,14 @@
-import { CardType } from './CardType';
+import { CardType } from "./CardType";
 
 type BingoDispathTypeType =
-  | 'prepare-game'
-  | 'start-game'
-  | 'restart-game'
-  | 'show-card'
-  | 'select-card'
-  | 'check-bingo'
-  | 'game-speed'
-  | 'game-difficulty';
+  | "prepare-game"
+  | "start-game"
+  | "restart-game"
+  | "show-card"
+  | "select-card"
+  | "check-bingo"
+  | "game-speed"
+  | "game-difficulty";
 
 export interface BingoDispathInterface {
   type: BingoDispathTypeType;

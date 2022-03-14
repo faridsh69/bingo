@@ -1,8 +1,8 @@
-import { Dispatch } from 'react';
+import { Dispatch } from "react";
 
-import { BingoDispathInterface } from './BingoDispathInterface';
-import { BingoStateInterface } from './BingoStateInterface';
-import { SnackbarPropsInterface } from './SnackbarPropsInterface';
+import { BingoDispathInterface } from "./BingoDispathInterface";
+import { BingoStateInterface } from "./BingoStateInterface";
+import { SnackbarPropsInterface } from "./SnackbarPropsInterface";
 
 export interface HeaderPropsInterface {
   state: BingoStateInterface;

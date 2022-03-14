@@ -1,9 +1,6 @@
-import { Dispatch } from 'react';
+import { Dispatch } from "react";
 
-import { BingoDispathInterface } from './BingoDispathInterface';
-import { BingoStateInterface } from './BingoStateInterface';
+import { BingoDispathInterface } from "./BingoDispathInterface";
+import { BingoStateInterface } from "./BingoStateInterface";
 
-export type GameReducerType = [
-  state: BingoStateInterface,
-  dispatch: Dispatch<BingoDispathInterface>
-];
+export type GameReducerType = [state: BingoStateInterface, dispatch: Dispatch<BingoDispathInterface>];

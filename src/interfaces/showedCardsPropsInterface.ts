@@ -1,4 +1,4 @@
-import { CardType } from './CardType';
+import { CardType } from "./CardType";
 
 export interface showedCardsPropsInterface {
   showedCards: CardType[];

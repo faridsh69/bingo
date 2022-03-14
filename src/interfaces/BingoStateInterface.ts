@@ -1,6 +1,6 @@
-import { CardType } from './CardType';
+import { CardType } from "./CardType";
 
-type BingoStatusType = 'initiated' | 'started';
+type BingoStatusType = "initiated" | "started";
 
 export interface BingoStateInterface {
   status: BingoStatusType;

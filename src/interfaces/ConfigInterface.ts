@@ -1,4 +1,4 @@
-import { CardType } from './CardType';
+import { CardType } from "./CardType";
 
 export default interface ConfigInterface {
   totalCards: number;
