@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
 import { Card, CardContent, List, ListItem, ListItemText, Typography } from '@mui/material';
 
-import { config } from '../configs';
-import { showedCardsPropsInterface } from '../interfaces/showedCardsPropsInterface';
+import { config } from '@configs/index';
+import { showedCardsPropsInterface } from '@interfaces/showedCardsPropsInterface';
 
 export const SideBar: FC<showedCardsPropsInterface> = props => {
   const { showedCards } = props;

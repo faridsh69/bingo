@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import Image from 'next/image';
 import { Button, Grid, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
-import { config } from '../configs';
+import { config } from '@configs/index';
 import { HeaderPropsInterface } from '@interfaces/HeaderPropsInterface';
 
 const Header: FC<HeaderPropsInterface> = props => {

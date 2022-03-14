@@ -1,7 +1,7 @@
 import { Alert, Snackbar, Stack, Typography } from '@mui/material';
 import React, { createContext, FC, useCallback, useState } from 'react';
-import { SnackbarContextValueInterface } from '../interfaces/SnackbarContextValueInterface';
-import { SnackbarPropsInterface } from '../interfaces/SnackbarPropsInterface';
+import { SnackbarContextValueInterface } from '@interfaces/SnackbarContextValueInterface';
+import { SnackbarPropsInterface } from '@interfaces/SnackbarPropsInterface';
 
 const defaultSnackbarProps: SnackbarPropsInterface = {
   open: false,

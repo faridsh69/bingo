@@ -1,6 +1,6 @@
 import { CardType } from '@interfaces/CardType';
-import { config } from '../configs';
-import { cards } from '../mocks/cards';
+import { config } from '@configs/index';
+import { cards } from '@mocks/cards';
 
 export const createTableCards = (): CardType[][] => {
   const { dimention } = config;

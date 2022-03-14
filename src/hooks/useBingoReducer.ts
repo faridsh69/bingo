@@ -1,8 +1,8 @@
 import { Reducer, useReducer } from 'react';
 
-import { config } from '../configs';
-import { cards } from '../mocks/cards';
-import { createTableCards, selectNewItem, getBingoCards } from '../helpers/bingo';
+import { config } from '@configs/index';
+import { cards } from '@mocks/cards';
+import { createTableCards, selectNewItem, getBingoCards } from '@helpers/bingo';
 import { BingoStateInterface } from '@interfaces/BingoStateInterface';
 import { BingoDispathInterface } from '@interfaces/BingoDispathInterface';
 import { GameReducerType } from '@interfaces/GameReducerType';

@@ -1,4 +1,4 @@
-import ConfigInterface from '../interfaces/ConfigInterface';
+import ConfigInterface from '@interfaces/ConfigInterface';
 
 export const config: ConfigInterface = {
   totalCards: 75,

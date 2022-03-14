@@ -17,16 +17,14 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@containers/*": ["src/containers/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"],
-      "@assets/*": ["src/assets/*"],
-      "@utils/*": ["src/utils/*"],
+      "@configs/*": ["src/configs/*"],
       "@contexts/*": ["src/contexts/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@hooks/*": ["src/hooks/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@api/*": ["api/*"],
-      "@lib/*": ["lib/*"]
+      "@mocks/*": ["src/mocks/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
