@@ -46,7 +46,7 @@ const Header: FC<HeaderPropsInterface> = props => {
   };
 
   return (
-    <Grid container spacing={1} mb={2}>
+    <Grid container spacing={1} m={1}>
       <Grid item md={2} sm={3}>
         <Image src="/logo.png" alt="logo" width={134} height={50} />
       </Grid>

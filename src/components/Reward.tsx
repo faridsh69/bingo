@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { FC } from "react";
 import { animated, useSpring } from "react-spring";
 
@@ -13,7 +14,11 @@ export const Reward: FC = () => {
 
   return (
     <animated.div style={bingoStyles} className="reward">
-      *** Bingo *** <br /> You are amazing, You will be in mars with ELON
+      <Typography variant="h5" sx={{ textAlign: "center" }}>
+        *** Bingo ***
+        <br /> You are amazing!
+        <br /> You will be in mars with ELON!!
+      </Typography>
     </animated.div>
   );
 };
