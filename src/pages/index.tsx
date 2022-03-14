@@ -16,7 +16,6 @@ const Index: NextPage = () => {
 
   const { speed, difficulty, status, tableCards, showedCards, selectedCards, bingoCards } = state;
   const { bingoCardClassName, selectedCardClassName } = config;
-
   const headerStateProp = useMemo(() => state, [speed, difficulty, status]);
 
   useEffect(() => {
